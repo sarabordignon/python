@@ -1,0 +1,7 @@
+OUTPUT "1-hamburguer, 2-pizza, 3-macarrao"
+OUTPUT "escolha"
+DECLARE escolha : INT
+INPUT escolha
+IF (escolha = 1) OUTPUT "hamburguer, uma bela escolha" ENDIF
+IF (escolha = 2) OUTPUT "pizza, uma bela escolha" ENDIF
+IF (escolha = 3) OUTPUT "macarrao, uma bela escolha" ENDIF
