@@ -1,0 +1,74 @@
+aluno = []
+
+def cadastro_do_aluno():
+    nome = input("informe o nome do aluno: ")
+    turma = int(input("informe a turma do aluno: "))
+    aluno.append ([nome, turma])
+    print ("cadastrado")
+    print (aluno)
+
+def media_do_aluno():
+    if aluno == []:
+        print ("aluno sem cadastro")
+        return
+    
+    print ("aluno cadastrado")
+    for n in range (len(aluno)):
+        print(n, "-", aluno[n])
+    nota1 = float(input("informe primeira nota: "))
+    nota2 = float(input("informe segunda nota: "))
+    nota3 = float(input("informe terceira nota: "))
+    media = (nota1+nota2+nota3) / 3
+    print(media)
+    if media >=6:
+        print ("aprovado")
+    else:
+        print ("reprovado")
+    
+def atualizacao_cadastro():
+    if aluno == []:
+        print ("sem cadastro")
+        return
+    
+    print ("cadastro")
+    for i in range(len(aluno)):
+        print(i, "-", aluno[i])
+        
+    indice = int(input("digite o número que deseja alterar: "))
+    
+    if indice <0 or indice >= len(aluno):
+        print ("invalido")
+        return
+    
+    print ("digite seus novos dados")
+    nome = input("informe o nome do aluno: ")
+    turma = int(input("informe turma do aluno: "))
+    
+    aluno[indice] = [nome, turma]
+    
+    print ("cadastrado novamente")
+
+while True:
+    print ("1-cadastro")
+    print ("2-média")
+    print ("3-atualização")
+    print ("4-sair")
+    
+    opcao = int(input("digite alguma opção: "))
+    
+    if opcao == 1:
+        cadastro_do_aluno()
+    elif opcao == 2:
+        media_do_aluno()
+    elif opcao == 3:
+        atualizacao_cadastro()
+    elif opcao == 4:
+        print ("saindo")
+        break
+    else:
+        print ("inválido")
+
+
+
+
+
