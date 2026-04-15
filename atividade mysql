@@ -1,0 +1,83 @@
+create table promovedor (
+cpf bigint(11) primary key,
+nome varchar (50) not null,
+instituicao varchar (150) not null,
+motivo text not null,
+telefone int not null );
+
+create table rifa (
+numero int primary key,
+nome_da_rifa varchar(150) not null,
+numeros_comprados int not null,
+premios text not null,
+quantidade_de_bloco int not null,
+cpf_promovedor bigint(11),
+foreign key (cpf_promovedor) references promovedor (cpf));
+
+create table pessoa (
+rg bigint(7) primary key,
+nome varchar (50) not null,
+numeros_comprados int not null,
+endereco text not null,
+telefone int not null,
+numero_da_rifa int,
+foreign key (numero_da_rifa) references rifa (numero));
+
+create table sorteio (
+numero_sorteado int primary key,
+premio text not null,
+quantidade_de_ganhadores int not null,
+data_do_sorteio date not null,
+rg_pessoa bigint(7),
+foreign key (rg_pessoa) references pessoa(rg));
+
+create table premiado (
+numero_premiado int primary key,
+nome varchar(50) not null,
+endereco text not null,
+telefone int not null,
+colocacao int not null,
+numero_sorteado int,
+foreign key (numero_sorteado) references sorteio(numero_sorteado));
+
+delete from pessoa;
+
+INSERT INTO promovedor (cpf, nome, instituicao, motivo, telefone)
+VALUES 
+(12345678901, 'João Silva', 'Empresa XYZ', 'Cadastro inicial', 47999999999),
+(23456789012, 'Maria Oliveira', 'Universidade ABC', 'Participação em projeto', 48988888888),
+(34567890123, 'Carlos Souza', 'Instituto Federal', 'Inscrição em curso', 47977777777),
+(45678901234, 'Ana Pereira', 'Prefeitura Municipal', 'Solicitação de serviço', 48966666666),
+(56789012345, 'Lucas Santos', 'ONG Esperança', 'Voluntariado', 47955555555);
+
+INSERT INTO rifa (numero, nome_da_rifa, numeros_comprados, premios, quantidade_de_bloco, cpf_promovedor)
+VALUES
+(1, 'Rifa Beneficente Escola', 10, 'Cesta básica', 100, 12345678901),
+(2, 'Rifa Solidária Hospital', 25, 'Bicicleta', 200, 23456789012),
+(3, 'Rifa ONG Animais', 5, 'Vale compras R$200', 150, 34567890123),
+(4, 'Rifa Igreja Comunidade', 12, 'Smartphone', 300, 45678901234),
+(5, 'Rifa Clube Esportivo', 8, 'Churrasqueira elétrica', 120, 56789012345);
+
+INSERT INTO pessoa (rg, nome, numeros_comprados, endereco, telefone, numero_da_rifa)
+VALUES
+(1234567, 'João Silva', 10, 'Rua das Flores, 123', 47999999999, 1),
+(2345678, 'Maria Oliveira', 5, 'Av. Brasil, 456', 48988888888, 2),
+(3456789, 'Carlos Souza', 8, 'Rua A, 789', 47977777777, 3),
+(4567890, 'Ana Pereira', 12, 'Rua B, 321', 48966666666, 4),
+(5678901, 'Lucas Santos', 3, 'Av. Central, 654', 47955555555, 5);
+
+INSERT INTO sorteio (numero_sorteado, premio, quantidade_de_ganhadores, data_do_sorteio, rg_pessoa)
+VALUES
+(10, 'Cesta básica', 1, '2026-05-01',1234567),
+(25, 'Bicicleta', 1, '2026-05-05',2345678),
+(33, 'Vale compras R$200', 2, '2026-05-10',3456789),
+(47, 'Smartphone', 1, '2026-05-15',4567890),
+(58, 'Churrasqueira elétrica', 3, '2026-05-20',5678901);
+
+INSERT INTO premiado (numero_premiado, nome, endereco, telefone, colocacao, numero_sorteado)
+VALUES
+(10, 'João Silva', 'Rua das Flores, 123', '(47) 99999-9999', 1, 10),
+(25, 'Maria Oliveira', 'Av. Brasil, 456', '(48) 98888-8888', 2, 25),
+(33, 'Carlos Souza', 'Rua A, 789', '(47) 97777-7777', 3, 33),
+(47, 'Ana Pereira', 'Rua B, 321', '(48) 96666-6666', 4, 47),
+(58, 'Lucas Santos', 'Av. Central, 654', '(47) 95555-5555', 5, 58 );
