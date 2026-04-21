@@ -130,4 +130,6 @@ def classificar_imc (imc):
 classificacao = classificar_imc (imc)
 print (classificacao)
 
+9
+
 
