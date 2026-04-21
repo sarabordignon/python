@@ -131,5 +131,52 @@ classificacao = classificar_imc (imc)
 print (classificacao)
 
 9
+tarefas = []
+
+def listar ():
+    if len(tarefas) == 0:
+        print ("sem registro de tarefas")
+    else:
+        for i, t in enumerate(tarefas, 1):
+            print (f"{i}. {t}")
+            
+def adicionar ():
+    tarefa = input("qual sua tarefa? ")
+    tarefas.append ([tarefa])
+    print ("tarefa adicionada")
+
+def remover():
+    if len(tarefas) == 0:
+        print ("nenhuma tarefa para remover")
+    else:
+        listar()
+        n_tarefa = int(input("qual o número da tarefa que deseja remover? "))
+        if 1 <= n_tarefa <= len(tarefas):
+            tarefas.pop(n_tarefa - 1)
+            print ("tarefa removida")
+        else:
+            print ("número não consta na lista tarefas")
+    
+while True:
+    print ("opções")
+    print ("1-adicionar")
+    print ("2-remover")
+    print ("3-listar")
+    print ("4-sair")
+    
+    opcao = int(input("escolha um número: "))
+     
+    if opcao == 1: 
+        adicionar ()
+            
+    elif opcao == 2:
+        remover()
+            
+    elif opcao == 3:
+        listar ()
+            
+    elif opcao == 4:
+        print ("saindo...")
+        break
 
 
