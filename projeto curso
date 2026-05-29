@@ -1,3 +1,5 @@
+conexao 
+
 import mysql.connector
 
 def conexao ():
@@ -7,8 +9,14 @@ def conexao ():
             password = "",
             database = "oficina"
     )
+        print ("conectado")
         cursor = con.cursor()
         return con, cursor
+
+cadastro
+
+import mysql.connector
+from conexao import conexao
 
 def inserir_dados (con, cursor):
         nome = input ("qual seu nome? ")
@@ -24,6 +32,11 @@ def inserir_dados (con, cursor):
 
         print ("inserção feita!")
 
+listar
+
+import mysql.connector
+from conexao import conexao
+
 def exibir_dados (cursor):
         cursor.execute("SELECT * FROM funcionarios")
         resultados = cursor.fetchall()
@@ -31,6 +44,12 @@ def exibir_dados (cursor):
         for i in resultados:
             print (i)
 
+chamar 
+
+import mysql.connector
+from conexao import conexao
+from cadastrofuncionarios import inserir_dados
+
+
 con, cursor = conexao ()
 inserir_dados (con, cursor)
-exibir_dados (cursor)
