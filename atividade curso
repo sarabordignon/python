@@ -1,0 +1,36 @@
+import mysql.connector
+
+def conexao ():
+        con = mysql.connector.connect(
+            host = "localhost",
+            user = "root",
+            password = "",
+            database = "oficina"
+    )
+        cursor = con.cursor()
+        return con, cursor
+
+def inserir_dados (con, cursor):
+        nome = input ("qual seu nome? ")
+        funcao = input ("qual sua função? ")
+        horario = input ("qual seu turno? ")
+        telefone = int(input("qual seu telefone? "))
+        sql = "INSERT INTO funcionarios (nome, funcao, turno, telefone) VALUES (%s, %s, %s, %s)"
+        values = (nome, funcao, horario, telefone)
+
+        cursor.execute(sql, values)
+        
+        con.commit()
+
+        print ("inserção feita!")
+
+def exibir_dados (cursor):
+        cursor.execute("SELECT * FROM funcionarios")
+        resultados = cursor.fetchall()
+        print ("\n dados da tabela:")
+        for i in resultados:
+            print (i)
+
+con, cursor = conexao ()
+inserir_dados (con, cursor)
+exibir_dados (cursor)
