@@ -1,0 +1,15 @@
+from fastapi import FastAPI 
+
+app = FastAPI()
+
+@app.get("/")
+def leitura_rota():
+    return {"mensagem:" "Primeira rota rodando!"}
+
+@app.get("/sobre")
+def sobre():
+    return {"nome: " "Sara" " | " "curso: " "Jovem Programador"} 
+
+@app.get("/sobre/{nome}")
+def sobrePersonalizado(nome: str):
+    return {"mensagem: " f"Olá, {nome}! Bem vindo(a) ao Jovem Programador!"}
